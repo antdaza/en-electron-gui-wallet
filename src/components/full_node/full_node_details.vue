@@ -1,11 +1,11 @@
 <template>
-  <q-dialog v-model="isVisible" class="serviceNodeDetails" maximized="">
+  <q-dialog v-model="isVisible" class="fullNodeDetails" maximized="">
     <q-layout>
       <q-header>
         <q-toolbar color="dark" inverted>
           <q-btn flat round dense icon="reply" @click="isVisible = false" />
           <q-toolbar-title>
-            {{ $t("titles.serviceNodeDetails") }}
+            {{ $t("titles.fullNodeDetails") }}
           </q-toolbar-title>
           <q-btn
             v-if="node.requested_unlock_height === 0"
@@ -26,16 +26,16 @@
       <q-page-container class="detail-page">
         <div class="layout-padding">
           <h6 class="q-mt-xs q-mb-none text-weight-light">
-            {{ $t("strings.serviceNodeDetails.serviceNodeKey") }}
+            {{ $t("strings.fullNodeDetails.fullNodeKey") }}
           </h6>
-          <p class="break-all">{{ node.service_node_pubkey }}</p>
+          <p class="break-all">{{ node.full_node_pubkey }}</p>
 
           <div class="info row justify-between">
             <div class="infoBox">
               <div class="infoBoxContent">
                 <div class="text">
                   <span>{{
-                    $t("strings.serviceNodeDetails.stakingRequirement")
+                    $t("strings.fullNodeDetails.stakingRequirement")
                   }}</span>
                 </div>
                 <div class="value">
@@ -49,7 +49,7 @@
               <div class="infoBoxContent">
                 <div class="text">
                   <span>{{
-                    $t("strings.serviceNodeDetails.totalContributed")
+                    $t("strings.fullNodeDetails.totalContributed")
                   }}</span>
                 </div>
                 <div class="value">
@@ -63,7 +63,7 @@
               <div class="infoBoxContent">
                 <div class="text">
                   <span>{{
-                    $t("strings.serviceNodeDetails.registrationHeight")
+                    $t("strings.fullNodeDetails.registrationHeight")
                   }}</span>
                 </div>
                 <div class="value">
@@ -75,7 +75,7 @@
               <div class="infoBoxContent">
                 <div class="text">
                   <span>{{
-                    $t("strings.serviceNodeDetails.operatorFee")
+                    $t("strings.fullNodeDetails.operatorFee")
                   }}</span>
                 </div>
                 <div class="value">
@@ -87,7 +87,7 @@
               <div class="infoBoxContent">
                 <div class="text">
                   <span>{{
-                    $t("strings.serviceNodeDetails.unlockHeight")
+                    $t("strings.fullNodeDetails.unlockHeight")
                   }}</span>
                 </div>
                 <div class="value">
@@ -99,7 +99,7 @@
               <div class="infoBoxContent">
                 <div class="text">
                   <span>{{
-                    $t("strings.serviceNodeDetails.lastUptimeProof")
+                    $t("strings.fullNodeDetails.lastUptimeProof")
                   }}</span>
                 </div>
                 <div class="value">
@@ -111,7 +111,7 @@
               <div class="infoBoxContent">
                 <div class="text">
                   <span>{{
-                    $t("strings.serviceNodeDetails.lastRewardBlockHeight")
+                    $t("strings.fullNodeDetails.lastRewardBlockHeight")
                   }}</span>
                 </div>
                 <div class="value">
@@ -123,7 +123,7 @@
           <q-list no-border :dark="theme == 'dark'" class="oxen-list">
             <q-item-label class="contributors-title"
               >{{
-                $t("strings.serviceNodeDetails.contributors")
+                $t("strings.fullNodeDetails.contributors")
               }}:</q-item-label
             >
             <q-item
@@ -178,7 +178,7 @@ import { date } from "quasar";
 import FormatOxen from "components/format_oxen";
 import ContextMenu from "components/menus/contextmenu";
 export default {
-  name: "ServiceNodeDetails",
+  name: "FullNodeDetails",
   components: {
     FormatOxen,
     ContextMenu
@@ -206,7 +206,7 @@ export default {
   },
   computed: mapState({
     theme: state => state.gateway.app.config.appearance.theme,
-    unlock_status: state => state.gateway.service_node_status.unlock,
+    unlock_status: state => state.gateway.full_node_status.unlock,
     is_ready() {
       return this.$store.getters["gateway/isReady"];
     },
@@ -252,8 +252,8 @@ export default {
     },
     openExplorer() {
       this.$gateway.send("core", "open_explorer", {
-        type: "service_node",
-        id: this.node.service_node_pubkey
+        type: "full_node",
+        id: this.node.full_node_pubkey
       });
     },
     formatDate(timestamp) {
@@ -283,7 +283,7 @@ export default {
   color: #1f1c47;
 }
 
-.serviceNodeDetails {
+.fullNodeDetails {
   .name {
     font-size: 0.92rem;
   }

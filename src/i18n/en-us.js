@@ -22,14 +22,14 @@ export default {
     generate: "GENERATE",
     import: "IMPORT",
     importWallet: "IMPORT WALLET | IMPORT WALLETS",
-    ons: "OXEN NAME SERVICE",
+    ons: "ANTD NAME SERVICE",
     max: "MAX",
     min: "MIN",
     next: "NEXT",
     openWallet: "OPEN WALLET",
     purchase: "PURCHASE",
     receive: "RECEIVE",
-    registerServiceNode: "REGISTER SERVICE NODE",
+    registerFullNode: "REGISTER FULL NODE",
     renew: "RENEW",
     rescan: "RESCAN",
     restoreWallet: "RESTORE WALLET",
@@ -39,7 +39,7 @@ export default {
     selectWalletFile: "SELECT WALLET FILE",
     send: "SEND",
     sendCoins: "SEND COINS",
-    serviceNode: "SERVICE NODES",
+    fullNode: "FULL NODES",
     settings: "SETTINGS",
     showQRCode: "SHOW QR CODE",
     showTxDetails: "SHOW TX DETAILS",
@@ -126,9 +126,9 @@ export default {
       message: "Do you want to renew the name?",
       ok: "RENEW"
     },
-    registerServiceNode: {
-      title: "Register service node",
-      message: "Do you want to register the service node?",
+    registerFullNode: {
+      title: "Register full node",
+      message: "Do you want to register the full node?",
       ok: "REGISTER"
     },
     rescan: {
@@ -194,14 +194,14 @@ export default {
       title: "Confirm unlock",
       ok: "UNLOCK"
     },
-    unlockServiceNode: {
-      title: "Unlock service node",
+    unlockFullNode: {
+      title: "Unlock full node",
       confirmTitle: "Confirm unlock",
-      message: "Do you want to unlock the service node?",
+      message: "Do you want to unlock the full node?",
       ok: "UNLOCK"
     },
-    unlockServiceNodeWarning: {
-      title: "Unlock service node warning",
+    unlockFullNodeWarning: {
+      title: "Unlock full node warning",
       message:
         "Unlocking a partial stake in a node will also unstake for any other participants, if staking in a shared node its best to let the operator and other participants know you are unstaking.",
       ok: "CONTINUE"
@@ -251,8 +251,8 @@ export default {
     restoreFromBlockHeight: "RESTORE FROM BLOCK HEIGHT",
     restoreFromDate: "RESTORE FROM DATE",
     seedLanguage: "SEED LANGUAGE",
-    serviceNodeCommand: "SERVICE NODE COMMAND",
-    serviceNodeKey: "SERVICE NODE KEY",
+    fullNodeCommand: "FULL NODE COMMAND",
+    fullNodeKey: "FULL NODE KEY",
     sessionId: "SESSION ID",
     signature: "SIGNATURE",
     transactionId: "TRANSACTION ID",
@@ -295,13 +295,13 @@ export default {
     copySeedWords: "Copy seed words",
     copySessionId: "Copy session ID",
     copySpendKey: "Copy spend key",
-    copyServiceNodeKey: "Copy service node key",
+    copyFullNodeKey: "Copy full node key",
     copyTransactionId: "Copy transaction ID",
     copyViewKey: "Copy view key",
     createNewWallet: "Create new wallet",
     deleteWallet: "Delete Wallet",
     exportTransfers: "Export Transfers",
-    exit: "Exit Oxen GUI Wallet",
+    exit: "Exit Antd GUI Wallet",
     importOldGUIWallet: "Import wallets from old GUI",
     manageKeyImages: "Manage Key Images",
     openWallet: "Open wallet",
@@ -339,9 +339,9 @@ export default {
       nameCopied: "Name copied to clipboard",
       ownerCopied: "Owner copied to clipboard",
       qrCopied: "QR code copied to clipboard",
-      registerServiceNodeSuccess: "Successfully registered service node",
+      registerFullNodeSuccess: "Successfully registered full node",
       sendSuccess: "Transaction successfully sent",
-      serviceNodeInfoFilled: "Service node key and min amount filled",
+      fullNodeInfoFilled: "Full node key and min amount filled",
       sessionIdCopied: "Session ID copied to clipboard",
       signatureCopied: "Signature copied to clipboard",
       signatureVerified: "Signature verified",
@@ -366,7 +366,7 @@ export default {
       enterName: "Enter a name",
       errorSavingItem: "Error saving {item}",
       exportTransfers: "Error exporting transfers",
-      failedServiceNodeUnlock: "Failed to unlock service node",
+      failedFullNodeUnlock: "Failed to unlock full node",
       failedToSetLanguage: "Failed to set language: {lang}",
       failedWalletImport: "Failed to import wallet",
       failedWalletOpen: "Failed to open wallet. Please try again.",
@@ -389,9 +389,9 @@ export default {
       invalidRestoreDate: "Invalid restore date",
       invalidRestoreHeight: "Invalid restore height",
       invalidSeedLength: "Invalid seed word length",
-      invalidServiceNodeCommand:
-        "Please enter the service node registration command",
-      invalidServiceNodeKey: "Service node key not valid",
+      invalidFullNodeCommand:
+        "Please enter the full node registration command",
+      invalidFullNodeKey: "Full node key not valid",
       invalidSessionId: "Session ID not valid",
       invalidSignature: "Invalid signature",
       invalidWalletPath: "Invalid wallet path",
@@ -416,7 +416,7 @@ export default {
       noExportTransfers: "No transfers found to export",
       noKeyImageExport: "No key images found to export",
       usingLocalNode: "Could not access remote node, switching to local only",
-      usingRemoteNode: "oxend not found, using remote node"
+      usingRemoteNode: "antdd not found, using remote node"
     }
   },
   placeholders: {
@@ -426,7 +426,7 @@ export default {
     dataToSign: "Data you want to sign with your primary address's private key",
     filterTx: "Enter an ID, name, address or amount",
     hexCharacters: "{count} hexadecimal characters",
-    onsName: "The name to purchase via Oxen Name Service",
+    onsName: "The name to purchase via Antd Name Service",
     onsBackupOwner: "The wallet address of the backup owner",
     onsDecryptName: "A ONS name that belongs to you",
     lokinetFullAddress:
@@ -438,7 +438,7 @@ export default {
       "Optional message against which the signature is signed",
     recipientWalletAddress: "Recipient's wallet address",
     selectAFile: "Please select a file",
-    sessionId: "The Session ID to link to Oxen Name Service",
+    sessionId: "The Session ID to link to Antd Name Service",
     signature: "Signature to verify",
     transactionNotes: "Additional notes to locally attach to the transaction",
     unsignedData: "The data as it should look before it was signed",
@@ -554,15 +554,15 @@ export default {
     saveToAddressBook: "Save to address book",
     seedWords: "Seed words",
     selectLanguage: "Select language",
-    serviceNodeContributionDescription:
-      "Staking contributes to the safety of the Oxen network. For your contribution, you earn OXEN. Once staked, you will have to wait either 15 or 30 days to have your OXEN unlocked, depending on if a stake was unlocked by a contributor or the node was deregistered. To learn more about staking, please visit the documentation on the",
-    serviceNodeRegistrationDescription:
-      'Enter the {registerCommand} command produced by the daemon that is registering to become a Service Node using the "{prepareCommand}" command',
-    serviceNodeStartStakingDescription:
+    fullNodeContributionDescription:
+      "Staking contributes to the safety of the Antd network. For your contribution, you earn ANTD. Once staked, you will have to wait either 15 or 30 days to have your ANTD unlocked, depending on if a stake was unlocked by a contributor or the node was deregistered. To learn more about staking, please visit the documentation on the",
+    fullNodeRegistrationDescription:
+      'Enter the {registerCommand} command produced by the daemon that is registering to become a Full Node using the "{prepareCommand}" command',
+    fullNodeStartStakingDescription:
       "To start staking, please visit the Staking tab",
-    noServiceNodesCurrentlyAvailable:
-      "There are currently no service nodes available for contribution",
-    serviceNodeDetails: {
+    noFullNodesCurrentlyAvailable:
+      "There are currently no full nodes available for contribution",
+    fullNodeDetails: {
       contributors: "Contributors",
       lastRewardBlockHeight: "Last reward block height",
       lastUptimeProof: "Last uptime proof",
@@ -572,7 +572,7 @@ export default {
       registrationHeight: "Registration height",
       unlockHeight: "Unlock height",
       reserved: "Reserved",
-      serviceNodeKey: "Service Node Key",
+      fullNodeKey: "Full Node Key",
       snKey: "SN Key",
       stakingRequirement: "Staking requirement",
       totalContributed: "Total contributed"
@@ -605,7 +605,7 @@ export default {
         pendingIncoming: "Pending incoming",
         pendingOutgoing: "Pending outgoing",
         miner: "Miner",
-        serviceNode: "Service Node",
+        fullNode: "Full Node",
         governance: "Governance",
         stake: "Stake",
         failed: "Failed"
@@ -630,7 +630,7 @@ export default {
       sign: "Sign",
       verify: "Verify"
     },
-    availableForContribution: "Service nodes available for contribution",
+    availableForContribution: "Full nodes available for contribution",
     changePassword: "Change password",
     configure: "Configure",
     currentlyStakedNodes: "Currently staked nodes",
@@ -644,13 +644,13 @@ export default {
       purchase: "PURCHASE",
       myOns: "MY ONS"
     },
-    serviceNode: {
+    fullNode: {
       registration: "REGISTRATION",
       staking: "STAKING",
       myStakes: "MY STAKES"
     },
 
-    serviceNodeDetails: "Service node details",
+    fullNodeDetails: "Full node details",
     settings: {
       title: "Settings",
       tabs: {

@@ -1,17 +1,17 @@
 <template>
-  <div class="service-node-stake-tab">
+  <div class="full-node-stake-tab">
     <div class="q-pa-md">
       <div class="q-pb-sm header">
-        <span v-if="service_nodes.length">
+        <span v-if="full_nodes.length">
           {{ $t("titles.currentlyStakedNodes") }}
         </span>
         <span v-else>{{
-          $t("strings.serviceNodeStartStakingDescription")
+          $t("strings.fullNodeStartStakingDescription")
         }}</span>
       </div>
-      <div v-if="service_nodes">
-        <ServiceNodeList
-          :service-nodes="service_nodes"
+      <div v-if="full_nodes">
+        <FullNodeList
+          :full-nodes="full_nodes"
           button-i18n="buttons.unlock"
           :details="details"
           :action="unlockWarning"
@@ -23,8 +23,8 @@
       >
         <q-spinner color="primary" size="30" />
       </q-inner-loading>
-      <ServiceNodeDetails
-        ref="serviceNodeDetailsUnlock"
+      <FullNodeDetails
+        ref="fullNodeDetailsUnlock"
         :action="unlockWarning"
         action-i18n="buttons.unlock"
       />
@@ -36,21 +36,21 @@
 import { clipboard } from "electron";
 import { mapState } from "vuex";
 import { required } from "vuelidate/lib/validators";
-import { service_node_key } from "src/validators/common";
+import { full_node_key } from "src/validators/common";
 import WalletPassword from "src/mixins/wallet_password";
-import ServiceNodeDetails from "./service_node_details";
-import ServiceNodeList from "./service_node_list";
+import FullNodeDetails from "./full_node_details";
+import FullNodeList from "./full_node_list";
 
 export default {
-  name: "ServiceNodeUnlock",
+  name: "FullNodeUnlock",
   components: {
-    ServiceNodeDetails,
-    ServiceNodeList
+    FullNodeDetails,
+    FullNodeList
   },
   mixins: [WalletPassword],
   data() {
     const menuItems = [
-      { action: "copyServiceNodeKey", i18n: "menuItems.copyServiceNodeKey" },
+      { action: "copyFullNodeKey", i18n: "menuItems.copyFullNodeKey" },
       { action: "viewOnExplorer", i18n: "menuItems.viewOnExplorer" }
     ];
     return {
@@ -59,14 +59,14 @@ export default {
   },
   computed: mapState({
     theme: state => state.gateway.app.config.appearance.theme,
-    unlock_status: state => state.gateway.service_node_status.unlock,
+    unlock_status: state => state.gateway.full_node_status.unlock,
     our_address: state => {
       const primary = state.gateway.wallet.address_list.primary[0];
       return (primary && primary.address) || null;
     },
     // just SNs the user has contributed to
-    service_nodes(state) {
-      let nodes = state.gateway.daemon.service_nodes.nodes;
+    full_nodes(state) {
+      let nodes = state.gateway.daemon.full_nodes.nodes;
       // don't count reserved nodes in my stakes (where they are a contributor of amount 0)
       const getOurContribution = node =>
         node.contributors.find(
@@ -75,8 +75,8 @@ export default {
       return nodes
         .filter(getOurContribution)
         .sort((a, b) => {
-          if (a.service_node_pubkey < b.service_node_pubkey) return -1;
-          if (a.service_node_pubkey > b.service_node_pubkey) return 1;
+          if (a.full_node_pubkey < b.full_node_pubkey) return -1;
+          if (a.full_node_pubkey > b.full_node_pubkey) return 1;
           return 0;
         })
         .map(n => {
@@ -87,10 +87,10 @@ export default {
           };
         });
     },
-    fetching: state => state.gateway.daemon.service_nodes.fetching
+    fetching: state => state.gateway.daemon.full_nodes.fetching
   }),
   validations: {
-    node_key: { required, service_node_key }
+    node_key: { required, full_node_key }
   },
   watch: {
     unlock_status: {
@@ -113,10 +113,10 @@ export default {
             // Tell the user to confirm
             this.$q
               .dialog({
-                title: this.$t("dialog.unlockServiceNode.confirmTitle"),
+                title: this.$t("dialog.unlockFullNode.confirmTitle"),
                 message,
                 ok: {
-                  label: this.$t("dialog.unlockServiceNode.ok"),
+                  label: this.$t("dialog.unlockFullNode.ok"),
                   color: "primary"
                 },
                 cancel: {
@@ -154,20 +154,20 @@ export default {
   },
   methods: {
     details(node) {
-      this.$refs.serviceNodeDetailsUnlock.isVisible = true;
-      this.$refs.serviceNodeDetailsUnlock.node = node;
+      this.$refs.fullNodeDetailsUnlock.isVisible = true;
+      this.$refs.fullNodeDetailsUnlock.node = node;
     },
     unlockWarning(node, event) {
-      const key = node.service_node_pubkey;
+      const key = node.full_node_pubkey;
       // stop detail page from popping up
-      this.$gateway.send("wallet", "update_service_node_list");
+      this.$gateway.send("wallet", "update_full_node_list");
       event.stopPropagation();
       this.$q
         .dialog({
-          title: this.$t("dialog.unlockServiceNodeWarning.title"),
-          message: this.$t("dialog.unlockServiceNodeWarning.message"),
+          title: this.$t("dialog.unlockFullNodeWarning.title"),
+          message: this.$t("dialog.unlockFullNodeWarning.message"),
           ok: {
-            label: this.$t("dialog.unlockServiceNodeWarning.ok"),
+            label: this.$t("dialog.unlockFullNodeWarning.ok"),
             color: "primary"
           },
           cancel: {
@@ -189,10 +189,10 @@ export default {
       this.key = key;
 
       let passwordDialog = await this.showPasswordConfirmation({
-        title: this.$t("dialog.unlockServiceNode.title"),
-        noPasswordMessage: this.$t("dialog.unlockServiceNode.message"),
+        title: this.$t("dialog.unlockFullNode.title"),
+        noPasswordMessage: this.$t("dialog.unlockFullNode.message"),
         ok: {
-          label: this.$t("dialog.unlockServiceNode.ok"),
+          label: this.$t("dialog.unlockFullNode.ok"),
           color: "primary"
         },
         dark: this.theme == "dark",
@@ -218,7 +218,7 @@ export default {
       });
       this.$gateway.send("wallet", "unlock_stake", {
         password,
-        service_node_key: key,
+        full_node_key: key,
         confirmed
       });
     },
@@ -228,13 +228,13 @@ export default {
         type: "positive",
         timeout: 1000,
         message: this.$t("notification.positive.copied", {
-          item: "Service node key"
+          item: "Full node key"
         })
       });
     },
     openExplorer(key) {
       this.$gateway.send("core", "open_explorer", {
-        type: "service_node",
+        type: "full_node",
         id: key
       });
     },

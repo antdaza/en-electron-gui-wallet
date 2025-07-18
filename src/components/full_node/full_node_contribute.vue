@@ -1,5 +1,5 @@
 <template>
-  <div class="service-node-stake-tab">
+  <div class="full-node-stake-tab">
     <div class="q-pa-md">
       <div class="row align-items sn-contribution-info">
         <div class="col-md-8">
@@ -10,23 +10,23 @@
             class="float-right vertical-top"
             icon="refresh"
             flat
-            @click="updateServiceNodeList"
+            @click="updateFullNodeList"
           />
         </div>
       </div>
-      <div v-if="awaitingServiceNodes.length > 0">
-        <ServiceNodeList
-          v-if="awaitingServiceNodes"
-          :service-nodes="awaitingServiceNodes"
+      <div v-if="awaitingFullNodes.length > 0">
+        <FullNodeList
+          v-if="awaitingFullNodes"
+          :full-nodes="awaitingFullNodes"
           button-i18n="buttons.stake"
           :details="details"
           :action="contributeToNode"
         />
       </div>
-      <div v-else>{{ $t("strings.noServiceNodesCurrentlyAvailable") }}</div>
+      <div v-else>{{ $t("strings.noFullNodesCurrentlyAvailable") }}</div>
     </div>
-    <ServiceNodeDetails
-      ref="serviceNodeDetailsContribute"
+    <FullNodeDetails
+      ref="fullNodeDetailsContribute"
       :action="contributeToNode"
       action-i18n="buttons.stake"
     />
@@ -38,23 +38,23 @@
 
 <script>
 import { mapState } from "vuex";
-import ServiceNodeList from "./service_node_list";
-import ServiceNodeDetails from "./service_node_details";
+import FullNodeList from "./full_node_list";
+import FullNodeDetails from "./full_node_details";
 export default {
-  name: "ServiceNodeContribute",
+  name: "FullNodeContribute",
   components: {
-    ServiceNodeList,
-    ServiceNodeDetails
+    FullNodeList,
+    FullNodeDetails
   },
   props: {
-    awaitingServiceNodes: {
+    awaitingFullNodes: {
       type: Array,
       required: true
     }
   },
   computed: mapState({
     theme: state => state.gateway.app.config.appearance.theme,
-    fetching: state => state.gateway.daemon.service_nodes.fetching
+    fetching: state => state.gateway.daemon.full_nodes.fetching
   }),
   methods: {
     scrollToTop() {
@@ -64,23 +64,23 @@ export default {
       // stop detail page from popping up
       event.stopPropagation();
       this.scrollToTop();
-      const key = node.service_node_pubkey;
+      const key = node.full_node_pubkey;
       const minContribution = node.minContribution;
       // close the detail popup if it's open
-      this.$refs.serviceNodeDetailsContribute.isVisible = false;
+      this.$refs.fullNodeDetailsContribute.isVisible = false;
       this.$emit("contribute", key, minContribution);
       this.$q.notify({
         type: "positive",
         timeout: 1000,
-        message: this.$t("notification.positive.serviceNodeInfoFilled")
+        message: this.$t("notification.positive.fullNodeInfoFilled")
       });
     },
     details(node) {
-      this.$refs.serviceNodeDetailsContribute.isVisible = true;
-      this.$refs.serviceNodeDetailsContribute.node = node;
+      this.$refs.fullNodeDetailsContribute.isVisible = true;
+      this.$refs.fullNodeDetailsContribute.node = node;
     },
-    updateServiceNodeList() {
-      this.$gateway.send("wallet", "update_service_node_list");
+    updateFullNodeList() {
+      this.$gateway.send("wallet", "update_full_node_list");
     }
   }
 };

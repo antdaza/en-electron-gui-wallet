@@ -35,29 +35,30 @@
         <p class="q-my-sm">Daemon Version: v{{ daemonVersion }}</p>
         <p class="q-my-sm">Copyright (c) 2018-2021, Oxen</p>
         <p class="q-my-sm">Copyright (c) 2018, Ryo Currency Project</p>
+        <p class="q-my-sm">Copyright (c) 2025, Antd Project</p>
         <p class="q-my-sm">All rights reserved.</p>
 
         <div class="q-mt-md q-mb-lg external-links">
           <p>
-            <a href="#" @click="openExternal('https://oxen.io/')"
-              >https://oxen.io/</a
+            <a href="#" @click="openExternal('https://antdaza.site/')"
+              >https://antdaza.site/</a
             >
           </p>
           <p>
-            <a href="#" @click="openExternal('https://t.me/Oxen_Community')"
+            <a href="#" @click="openExternal('https://t.me/Antd_Community')"
               >Telegram</a
             >
             -
             <a
               href="#"
-              @click="openExternal('https://discordapp.com/invite/67GXfD6')"
+              @click="openExternal('https://discordapp.com/invite/antdaza')"
               >Discord</a
             >
             -
-            <!-- readded once oxen subreddit is known -->
+            <!-- readded once antd subreddit is known -->
             <!-- <a
               href="#"
-              @click="openExternal('https://www.reddit.com/r/LokiProject/')"
+              @click="openExternal('https://www.reddit.com/r/Antdaza/')"
               >Reddit</a
             >
             - -->
@@ -65,7 +66,7 @@
               href="#"
               @click="
                 openExternal(
-                  'https://github.com/loki-project/loki-electron-gui-wallet'
+                  'https://github.com/antdaza/antd-electron-gui-wallet'
                 )
               "
               >Github</a

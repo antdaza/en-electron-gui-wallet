@@ -16,7 +16,7 @@
           />
         </template>
         <q-toolbar-title
-          v-if="page_title == 'Oxen'"
+          v-if="page_title == 'Antd'"
           class="flex items-center justify-center"
         >
           <img src="oxen-white.svg" height="32" />
@@ -70,7 +70,7 @@ export default {
 
         default:
         case "wallet-select":
-          return "Oxen";
+          return "Antd";
       }
     }
   },

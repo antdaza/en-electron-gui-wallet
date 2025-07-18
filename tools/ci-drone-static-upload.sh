@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # Script used with Drone CI to upload build artifacts (because specifying all this in
 # .drone.jsonnet is too painful).
 
@@ -21,16 +20,16 @@ chmod 600 ssh_key
 
 branch_or_tag=${DRONE_BRANCH:-${DRONE_TAG:-unknown}}
 
-upload_to="oxen.rocks/${DRONE_REPO// /_}/${branch_or_tag// /_}"
+upload_to="antd.rocks/${DRONE_REPO// /_}/${branch_or_tag// /_}"
 
-MACOS_APP=${MACOS_APP:-"dist/electron/Packaged/mac/Oxen Electron Wallet.app"}
+MACOS_APP=${MACOS_APP:-"dist/electron/Packaged/mac/Antd Electron Wallet.app"}
 if [ "$(uname -s)" == "Darwin" ]; then
     if codesign -v "$MACOS_APP"; then
         echo -e "\e[32;1mApp is codesigned!"
     else
         echo -e "\e[33;1mApp is not codesigned; renaming to -unsigned"
         if [ -z "$MAC_BUILD_IS_CODESIGNED" ]; then
-            for f in dist/electron/Packaged/{oxen-electron-wallet,latest}*-mac*; do
+            for f in dist/electron/Packaged/{antd-electron-wallet,latest}*-mac*; do
                 if [[ $f = *\** ]]; then  # Unexpanded glob means it didn't match anything
                     echo "Did not find any files matching $f"
                 fi
@@ -45,7 +44,7 @@ if [ "$(uname -s)" == "Darwin" ]; then
 fi
 
 puts=
-for f in dist/electron/Packaged/{oxen-electron-wallet-*,latest*.yml}; do
+for f in dist/electron/Packaged/{antd-electron-wallet-*,latest*.yml}; do
     if [[ $f = *\** ]]; then  # Unexpanded glob means it didn't match anything
         echo "Did not find any files matching $f"
         ls --color -F -l dist/electron/Packaged
@@ -67,7 +66,7 @@ for p in "${upload_dirs[@]}"; do
 -mkdir $dir_tmp"
 done
 
-sftp -i ssh_key -b - -o StrictHostKeyChecking=off drone@oxen.rocks <<SFTP
+sftp -i ssh_key -b - -o StrictHostKeyChecking=off drone@antd.rocks <<SFTP
 $mkdirs
 $puts
 SFTP

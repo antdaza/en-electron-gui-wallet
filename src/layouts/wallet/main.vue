@@ -35,10 +35,10 @@
               align="between"
             />
           </router-link>
-          <router-link to="/wallet/servicenode">
+          <router-link to="/wallet/fullnode">
             <q-btn
               class="large-btn"
-              :label="$t('buttons.serviceNode')"
+              :label="$t('buttons.fullNode')"
               size="md"
               icon-right="router"
               align="between"

@@ -2,7 +2,7 @@
 
 ### Introduction
 
-Oxen (formerly Loki) is a private cryptocurrency based on Monero. Oxen aims to provide a private data transmission layer using a second layer of Service Nodes.
+Oxen (formerly Loki) is a private cryptocurrency based on Monero. Oxen aims to provide a private data transmission layer using a second layer of Full Nodes.
 More information on the project can be found on the [website](https://oxen.io) and in the [whitepaper](https://loki.network/whitepaper). Oxen is an open source project, and we encourage contributions from anyone with something to offer.
 
 ![Oxen wallet image](./src-electron/icons/mrcuug.PNG)

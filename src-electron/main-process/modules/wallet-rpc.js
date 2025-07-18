@@ -139,8 +139,8 @@ export class WalletRPC {
 
         const rpcExecutable =
           process.platform === "win32"
-            ? "oxen-wallet-rpc.exe"
-            : "oxen-wallet-rpc";
+            ? "antd-wallet-rpc.exe"
+            : "antd-wallet-rpc";
         // eslint-disable-next-line no-undef
         const rpcPath = path.join(__ryo_bin, rpcExecutable);
 
@@ -148,7 +148,7 @@ export class WalletRPC {
         if (!fs.existsSync(rpcPath)) {
           reject(
             new Error(
-              "Failed to find Oxen Wallet RPC. Please make sure your anti-virus has not removed it."
+              "Failed to find Antd Wallet RPC. Please make sure your anti-virus has not removed it."
             )
           );
           return;
@@ -293,7 +293,7 @@ export class WalletRPC {
         break;
 
       case "restore_view_wallet":
-        // TODO: Decide if we want this for Oxen
+        // TODO: Decide if we want this for Antd
         this.restoreViewWallet(
           params.name,
           params.password,
@@ -327,18 +327,18 @@ export class WalletRPC {
         );
         break;
 
-      case "register_service_node":
+      case "register_full_node":
         this.registerSnode(params.password, params.string);
         break;
 
-      case "update_service_node_list":
-        this.updateServiceNodeList();
+      case "update_full_node_list":
+        this.updateFullNodeList();
         break;
 
       case "unlock_stake":
         this.unlockStake(
           params.password,
-          params.service_node_key,
+          params.full_node_key,
           params.confirmed || false
         );
         break;
@@ -1448,7 +1448,7 @@ export class WalletRPC {
     }
   }
 
-  stake(password, amount, service_node_key, destination) {
+  stake(password, amount, full_node_key, destination) {
     crypto.pbkdf2(
       password,
       this.auth[2],
@@ -1482,7 +1482,7 @@ export class WalletRPC {
         this.sendRPC("stake", {
           amount,
           destination,
-          service_node_key
+          full_node_key
         }).then(data => {
           if (data.hasOwnProperty("error")) {
             let error =
@@ -1499,7 +1499,7 @@ export class WalletRPC {
           }
 
           // Update the new snode list
-          this.backend.daemon.updateServiceNodes();
+          this.backend.daemon.updateFullNodes();
 
           this.sendGateway("set_snode_status", {
             stake: {
@@ -1513,7 +1513,7 @@ export class WalletRPC {
     );
   }
 
-  registerSnode(password, register_service_node_str) {
+  registerSnode(password, register_full_node_str) {
     crypto.pbkdf2(
       password,
       this.auth[2],
@@ -1543,8 +1543,8 @@ export class WalletRPC {
           return;
         }
 
-        this.sendRPC("register_service_node", {
-          register_service_node_str
+        this.sendRPC("register_full_node", {
+          register_full_node_str
         }).then(data => {
           if (data.hasOwnProperty("error")) {
             const error =
@@ -1561,12 +1561,12 @@ export class WalletRPC {
           }
 
           // Update the new snode list
-          this.backend.daemon.updateServiceNodes();
+          this.backend.daemon.updateFullNodes();
 
           this.sendGateway("set_snode_status", {
             registration: {
               code: 0,
-              i18n: "notification.positive.registerServiceNodeSuccess",
+              i18n: "notification.positive.registerFullNodeSuccess",
               sending: false
             }
           });
@@ -1575,11 +1575,11 @@ export class WalletRPC {
     );
   }
 
-  async updateServiceNodeList() {
-    this.backend.daemon.updateServiceNodes();
+  async updateFullNodeList() {
+    this.backend.daemon.updateFullNodes();
   }
 
-  unlockStake(password, service_node_key, confirmed = false) {
+  unlockStake(password, full_node_key, confirmed = false) {
     const sendError = (message, i18n = true) => {
       const key = i18n ? "i18n" : "message";
       this.sendGateway("set_snode_status", {
@@ -1611,7 +1611,7 @@ export class WalletRPC {
 
         const sendRPC = path => {
           return this.sendRPC(path, {
-            service_node_key
+            full_node_key
           }).then(data => {
             if (data.hasOwnProperty("error")) {
               const error =
@@ -1622,7 +1622,7 @@ export class WalletRPC {
             }
 
             if (!data.hasOwnProperty("result")) {
-              sendError("notification.errors.failedServiceNodeUnlock");
+              sendError("notification.errors.failedFullNodeUnlock");
               return null;
             }
 
@@ -1642,7 +1642,7 @@ export class WalletRPC {
 
             // Update the new snode list
             if (data.unlocked) {
-              this.backend.daemon.updateServiceNodes();
+              this.backend.daemon.updateFullNodes();
             }
 
             this.sendGateway("set_snode_status", { unlock });
@@ -1743,7 +1743,7 @@ export class WalletRPC {
 
   // prepares params and provides a "confirm" popup to allow the user to check
   // send address and tx fees before sending
-  // isSweepAll refers to if it's the sweep from service nodes page
+  // isSweepAll refers to if it's the sweep from full nodes page
   transfer(password, amount, address, priority, isSweepAll) {
     console.log(
       "TODO sean remove this - wallet: " + JSON.stringify(this.wallet)

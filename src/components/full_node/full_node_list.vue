@@ -1,15 +1,15 @@
 <template>
   <div>
-    <q-list class="service-node-list" no-border>
+    <q-list class="full-node-list" no-border>
       <q-item
-        v-for="node in serviceNodes"
-        :key="node.service_node_pubkey"
+        v-for="node in fullNodes"
+        :key="node.full_node_pubkey"
         @click.native="details(nodeWithMinContribution(node))"
       >
         <q-item-section>
           <q-item-label class="ellipsis"
-            >{{ $t("strings.serviceNodeDetails.snKey") }}:
-            {{ node.service_node_pubkey }}</q-item-label
+            >{{ $t("strings.fullNodeDetails.snKey") }}:
+            {{ node.full_node_pubkey }}</q-item-label
           >
           <q-item-label class="non-selectable">
             <span v-if="node.ourContributionAmount > 0">
@@ -26,13 +26,13 @@
                 node.ourContributionAmount === 0 && node.awaitingContribution
               "
             >
-              {{ $t("strings.serviceNodeDetails.reserved") }} •
+              {{ $t("strings.fullNodeDetails.reserved") }} •
             </span>
             <span v-if="node.awaitingContribution" class="contrib-amounts">
-              {{ $t("strings.serviceNodeDetails.minContribution") }}:
-              {{ getMinContribution(node, our_address) }} OXEN •
-              {{ $t("strings.serviceNodeDetails.maxContribution") }}:
-              {{ openForContributionOxen(node, our_address) }} OXEN
+              {{ $t("strings.fullNodeDetails.minContribution") }}:
+              {{ getMinContribution(node, our_address) }} ANTD •
+              {{ $t("strings.fullNodeDetails.maxContribution") }}:
+              {{ openForContributionOxen(node, our_address) }} ANTD
             </span>
           </q-item-label>
         </q-item-section>
@@ -59,8 +59,8 @@
         </q-item-section>
         <ContextMenu
           :menu-items="menuItems"
-          @viewOnExplorer="openExplorer(node.service_node_pubkey)"
-          @copyServiceNodeKey="copyKey(node.service_node_pubkey)"
+          @viewOnExplorer="openExplorer(node.full_node_pubkey)"
+          @copyFullNodeKey="copyKey(node.full_node_pubkey)"
         />
       </q-item>
     </q-list>
@@ -71,18 +71,18 @@
 import { clipboard } from "electron";
 import ContextMenu from "components/menus/contextmenu";
 import FormatOxen from "components/format_oxen";
-import ServiceNodeMixin from "src/mixins/service_node_mixin";
+import FullNodeMixin from "src/mixins/full_node_mixin";
 import { mapState } from "vuex";
 
 export default {
-  name: "ServiceNodeList",
+  name: "FullNodeList",
   components: {
     ContextMenu,
     FormatOxen
   },
-  mixins: [ServiceNodeMixin],
+  mixins: [FullNodeMixin],
   props: {
-    serviceNodes: {
+    fullNodes: {
       type: Array,
       required: true
     },
@@ -101,7 +101,7 @@ export default {
   },
   data() {
     const menuItems = [
-      { action: "copyServiceNodeKey", i18n: "menuItems.copyServiceNodeKey" },
+      { action: "copyFullNodeKey", i18n: "menuItems.copyFullNodeKey" },
       { action: "viewOnExplorer", i18n: "menuItems.viewOnExplorer" }
     ];
     return {
@@ -152,13 +152,13 @@ export default {
         type: "positive",
         timeout: 1000,
         message: this.$t("notification.positive.copied", {
-          item: "Service node key"
+          item: "Full node key"
         })
       });
     },
     openExplorer(key) {
       this.$gateway.send("core", "open_explorer", {
-        type: "service_node",
+        type: "full_node",
         id: key
       });
     }

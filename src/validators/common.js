@@ -9,7 +9,7 @@ export const privkey = input => {
   );
 };
 
-export const service_node_key = input => {
+export const full_node_key = input => {
   return input.length === 64 && /^[0-9A-Za-z]+$/.test(input);
 };
 

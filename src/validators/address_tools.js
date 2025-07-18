@@ -1947,10 +1947,10 @@ return{_strlen:lb,_ge_mul8:Va,_keccak:db,_ge_scalarmult:Ta,_ge_fromfe_frombytes_
 
 var oxenConfig = {
     coinUnitPlaces: 12,
-    coinSymbol: 'OXEN',
-    coinName: 'Oxen',
-    coinUriPrefix: 'oxen:',
-    addressPrefix: 114,
+    coinSymbol: 'ANTD',
+    coinName: 'Antd',
+    coinUriPrefix: 'antd:',
+    addressPrefix: 18,
 };
 
 var cnUtilGen = function(initConfig) {

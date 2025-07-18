@@ -23,7 +23,7 @@ export default {
     next: "ДАЛЕЕ",
     openWallet: "ОТКРЫТЬ КОШЕЛЕК",
     receive: "ПОЛУЧИТЬ",
-    registerServiceNode: "ЗАРЕГИСТРИРОВАТЬ СЕРВИСНУЮ НОДУ",
+    registerFullNode: "ЗАРЕГИСТРИРОВАТЬ СЕРВИСНУЮ НОДУ",
     rescan: "ПЕРЕСКАНИРОВАТЬ",
     restoreWallet: "ВОССТАНОВИТЬ КОШЕЛЕК",
     save: "СОХРАНИТЬ",
@@ -32,7 +32,7 @@ export default {
     selectWalletFile: "ВЫБРАТЬ ФАЙЛ КОШЕЛЬКА",
     send: "ОТПРАВИТЬ",
     sendCoins: "ОТПРАВИТЬ МОНЕТЫ",
-    serviceNode: "СЕРВИСНАЯ НОДА",
+    fullNode: "СЕРВИСНАЯ НОДА",
     settings: "НАСТРОЙКИ",
     showQRCode: "ПОКАЗАТЬ QR КОД",
     showTxDetails: "ПОКАЗАТЬ ДЕТАЛИ ТРАНЗАКЦИИ",
@@ -97,7 +97,7 @@ export default {
       title: "Пароль",
       message: "Введите пароль кошелька"
     },
-    registerServiceNode: {
+    registerFullNode: {
       title: "Регистрация сервисной ноды",
       message: "Вы уверены, что хотите зарегистрировать сервисную ноду?",
       ok: "ЗАРЕГИСТРИРОВАТЬ"
@@ -153,14 +153,14 @@ export default {
       title: "Подтвердить разблокировку",
       ok: "РАЗБЛОКИРОВАТЬ"
     },
-    unlockServiceNode: {
+    unlockFullNode: {
       title: "Разблокировать сервисную ноду",
       confirmTitle: "Подтверждение разблокировки",
       message: "Вы уверены, что хотите разблокировать сервисную ноду?",
       ok: "РАЗБЛОКИРОВАТЬ"
     },
-    unlockServiceNodeWarning: {
-      title: "Unlock service node warning",
+    unlockFullNodeWarning: {
+      title: "Unlock full node warning",
       message:
         "Unlocking a partial stake in a node will also unstake for any other participants, if staking in a shared node its best to let the operator and other participants know you are unstaking.",
       ok: "CONTINUE"
@@ -201,8 +201,8 @@ export default {
     restoreFromBlockHeight: "ВОССТАНОВИТЬ НАЧИНАЯ С ВЫСОТЫ БЛОКА",
     restoreFromDate: "ВОССТАНОВИТЬ НАЧИНАЯ С ДАТЫ",
     seedLanguage: "ЯЗЫК SEED-ФРАЗЫ",
-    serviceNodeCommand: "КОМАНДА РЕГИСТРАЦИИ СЕРВИСНОЙ НОДЫ",
-    serviceNodeKey: "КЛЮЧ СЕРВИСНОЙ НОДЫ",
+    fullNodeCommand: "КОМАНДА РЕГИСТРАЦИИ СЕРВИСНОЙ НОДЫ",
+    fullNodeKey: "КЛЮЧ СЕРВИСНОЙ НОДЫ",
     signature: "SIGNATURE",
     transactionId: "TRANSACTION ID",
     walletFile: "ФАЙЛ КОШЕЛЬКА",
@@ -236,12 +236,12 @@ export default {
     copyQR: "Копировать QR код",
     copySeedWords: "Копировать seed-фразу",
     copySpendKey: "Копировать Ключ Отправки",
-    copyServiceNodeKey: "Copy service node key",
+    copyFullNodeKey: "Copy full node key",
     copyTransactionId: "Копировать ID транзакции",
     copyViewKey: "Копировать Ключ Просмотра",
     createNewWallet: "Создать новый кошелек",
     deleteWallet: "Удалить Кошелек",
-    exit: "Закрыть Кошелек Oxen",
+    exit: "Закрыть Кошелек Antd",
     importOldGUIWallet: "Импортировать кошельки из старого GUI",
     manageKeyImages: "Управлять Ключевыми Образами",
     openWallet: "Открыть кошелек",
@@ -269,7 +269,7 @@ export default {
       },
       passwordUpdated: "Пароль обновлен",
       qrCopied: "QR код скопирован в буфер",
-      registerServiceNodeSuccess: "Сервисная нода успешно зарегистрирована",
+      registerFullNodeSuccess: "Сервисная нода успешно зарегистрирована",
       sendSuccess: "Транзакция успешно отправлена",
       signatureCopied: "Signature copied to clipboard",
       stakeSuccess: "Стейк успешно начат",
@@ -289,7 +289,7 @@ export default {
       enterTransactionProof: "Enter transaction proof",
       enterWalletName: "Введите имя кошелька",
       errorSavingItem: "Ошибка сохранения {item}",
-      failedServiceNodeUnlock: "Не удалось разблокировать сервисную ноду",
+      failedFullNodeUnlock: "Не удалось разблокировать сервисную ноду",
       failedToSetLanguage: "Не удалось переключить язык: {lang}",
       failedWalletImport: "Не удалось импортировать кошелек",
       failedWalletOpen: "Не удалось открыть кошелек. Попробуйте еще раз.",
@@ -304,9 +304,9 @@ export default {
       invalidRestoreDate: "Неверная дата восстановления",
       invalidRestoreHeight: "Неверная высота блока восстановления",
       invalidSeedLength: "Неверная длина seed-фразы",
-      invalidServiceNodeCommand:
+      invalidFullNodeCommand:
         "Пожалуйста введите команду регистрации сервисной ноды",
-      invalidServiceNodeKey: "Ключ сервисной ноды указан неверно",
+      invalidFullNodeKey: "Ключ сервисной ноды указан неверно",
       invalidWalletPath: "Неверный путь к кошельку",
       keyImages: {
         exporting: "Ошибка экспорта ключевых образов",
@@ -329,7 +329,7 @@ export default {
       noKeyImageExport: "Не найдено ключевых образов для экспорта",
       usingLocalNode:
         "Не удалось подключиться к удаленной ноде, переключаемся на локальную ноду",
-      usingRemoteNode: "Не найден файл oxend, используется удаленная нода"
+      usingRemoteNode: "Не найден файл antdd, используется удаленная нода"
     }
   },
   placeholders: {
@@ -431,7 +431,7 @@ export default {
     saveToAddressBook: "Сохранить в адресной книге",
     seedWords: "Seed-фраза",
     selectLanguage: "Выберите язык",
-    serviceNodeRegistrationDescription:
+    fullNodeRegistrationDescription:
       'Введите команду {registerCommand}, созданную демоном при регистрации Сервисной Ноды с помощью команды "{prepareCommand}"',
     spendKey: "Ключ Отправки",
     startingDaemon: "Запуск демона",
@@ -457,7 +457,7 @@ export default {
         pendingIncoming: "Ожидающие входящие",
         pendingOutgoing: "Ожидающие исходящие",
         miner: "Майнинг",
-        serviceNode: "Сервисная Нода",
+        fullNode: "Сервисная Нода",
         governance: "Управление",
         stake: "Стейк",
         failed: "Не удавшиеся"
@@ -482,7 +482,7 @@ export default {
     currentlyStakedNodes: "Currently staked nodes",
     privateKeys: "Приватные ключи",
     rescanWallet: "Пересканировать кошелек",
-    serviceNode: {
+    fullNode: {
       registration: "РЕГИСТРАЦИЯ",
       staking: "СТЕЙК"
     },

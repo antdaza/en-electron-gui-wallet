@@ -156,16 +156,16 @@ module.exports = function() {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: "com.oxen.electron-wallet",
-        productName: "Oxen Electron Wallet",
-        copyright: "Copyright © 2018-2022 Oxen, 2018 Ryo Currency Project",
+        appId: "com.antd.electron-wallet",
+        productName: "Antd Electron Wallet",
+        copyright: "Copyright © 2018-2022 Oxen, 2018 Ryo Currency Project, 2025 Antd Project",
         afterSign: "build/notarize.js",
-        artifactName: "oxen-electron-wallet-${version}-${os}.${ext}",
+        artifactName: "antd-electron-wallet-${version}-${os}.${ext}",
         publish: "github",
 
         linux: {
           target: ["AppImage", "deb"],
-          icon: "oxen-electron-wallet.png",
+          icon: "antd-electron-wallet.png",
           category: "Finance"
         },
         // see https://www.electron.build/configuration/linux#debian-package-options
@@ -198,7 +198,7 @@ module.exports = function() {
         },
 
         dmg: {
-          background: "src-electron/build/oxen-dmg.tiff",
+          background: "src-electron/build/antd-dmg.tiff",
           sign: false
         },
 

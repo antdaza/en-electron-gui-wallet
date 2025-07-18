@@ -90,8 +90,8 @@ export default [
         component: () => import("pages/wallet/addressbook")
       },
       {
-        path: "servicenode",
-        component: () => import("pages/wallet/service-node")
+        path: "fullnode",
+        component: () => import("pages/wallet/full-node")
       },
       {
         path: "ons",

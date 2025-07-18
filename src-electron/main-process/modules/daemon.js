@@ -29,7 +29,7 @@ export class Daemon {
   checkVersion() {
     return new Promise(resolve => {
       if (process.platform === "win32") {
-        let oxend_path = path.join(__ryo_bin, "oxend.exe");
+        let oxend_path = path.join(__ryo_bin, "antdd.exe");
         let oxend_version_cmd = `"${oxend_path}" --version`;
         if (!fs.existsSync(oxend_path)) {
           resolve(false);
@@ -41,7 +41,7 @@ export class Daemon {
           resolve(stdout);
         });
       } else {
-        let oxend_path = path.join(__ryo_bin, "oxend");
+        let oxend_path = path.join(__ryo_bin, "antdd");
         let oxend_version_cmd = `"${oxend_path}" --version`;
         if (!fs.existsSync(oxend_path)) {
           resolve(false);
@@ -148,7 +148,7 @@ export class Daemon {
         args.push("--stagenet");
       }
 
-      args.push("--log-file", path.join(dirs[net_type], "logs", "oxend.log"));
+      args.push("--log-file", path.join(dirs[net_type], "logs", "antdd.log"));
       if (daemon.rpc_bind_ip !== "127.0.0.1") {
         args.push("--confirm-external-bind");
       }
@@ -173,12 +173,12 @@ export class Daemon {
           if (status === "closed") {
             if (process.platform === "win32") {
               this.daemonProcess = child_process.spawn(
-                path.join(__ryo_bin, "oxend.exe"),
+                path.join(__ryo_bin, "antdd.exe"),
                 args
               );
             } else {
               this.daemonProcess = child_process.spawn(
-                path.join(__ryo_bin, "oxend"),
+                path.join(__ryo_bin, "antdd"),
                 args,
                 {
                   detached: true
@@ -388,11 +388,11 @@ export class Daemon {
     }, 30 * 1000); // 30 seconds
     this.heartbeatSlowAction();
 
-    clearInterval(this.serviceNodeHeartbeat);
-    this.serviceNodeHeartbeat = setInterval(() => {
-      this.updateServiceNodes();
+    clearInterval(this.fullNodeHeartbeat);
+    this.fullNodeHeartbeat = setInterval(() => {
+      this.updateFullNodes();
     }, 5 * 60 * 1000); // 5 minutes
-    this.updateServiceNodes();
+    this.updateFullNodes();
   }
 
   heartbeatAction() {
@@ -467,20 +467,20 @@ export class Daemon {
     });
   }
 
-  updateServiceNodes() {
-    const service_nodes = {
+  updateFullNodes() {
+    const full_nodes = {
       fetching: true
     };
-    this.sendGateway("set_daemon_data", { service_nodes });
-    this.getRPC("service_nodes").then(data => {
+    this.sendGateway("set_daemon_data", { full_nodes });
+    this.getRPC("full_nodes").then(data => {
       if (!data.hasOwnProperty("result")) return;
-      const nodes = data.result.service_node_states;
+      const nodes = data.result.full_node_states;
 
-      const service_nodes = {
+      const full_nodes = {
         nodes,
         fetching: false
       };
-      this.sendGateway("set_daemon_data", { service_nodes });
+      this.sendGateway("set_daemon_data", { full_nodes });
     });
   }
 

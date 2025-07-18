@@ -64,7 +64,7 @@ export default {
           value: "miner"
         },
         {
-          label: this.$t("strings.transactions.types.serviceNode"),
+          label: this.$t("strings.transactions.types.fullNode"),
           value: "snode"
         },
         {

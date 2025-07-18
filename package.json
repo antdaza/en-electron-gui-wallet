@@ -1,16 +1,16 @@
 {
-  "name": "oxen-electron-wallet",
+  "name": "antd-electron-wallet",
   "version": "1.8.1",
-  "description": "Modern GUI interface for Oxen Currency",
-  "productName": "Oxen Electron Wallet",
+  "description": "Modern GUI interface for Antd Currency",
+  "productName": "Antd Electron Wallet",
   "repository": {
     "type": "git",
-    "url": "https://github.com/loki-project/loki-electron-gui-wallet.git"
+    "url": "https://github.com/antdaza/antd-electron-gui-wallet.git"
   },
-  "cordovaId": "com.oxen.wallet",
+  "cordovaId": "com.antd.wallet",
   "author": {
-    "name": "Oxen",
-    "email": "oxen@oxen.io"
+    "name": "Antd",
+    "email": "antd@antdaza.site"
   },
   "private": true,
   "scripts": {

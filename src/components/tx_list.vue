@@ -82,7 +82,7 @@ export default {
         case "miner":
           return i18n.t("strings.transactions.types.miner");
         case "snode":
-          return i18n.t("strings.transactions.types.serviceNode");
+          return i18n.t("strings.transactions.types.fullNode");
         case "gov":
           return i18n.t("strings.transactions.types.governance");
         case "stake":

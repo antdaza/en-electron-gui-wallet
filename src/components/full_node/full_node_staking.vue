@@ -1,34 +1,34 @@
 <template>
-  <div class="service-node-staking">
+  <div class="full-node-staking">
     <div class="q-px-md q-pt-md">
       <p class="tab-desc">
-        {{ $t("strings.serviceNodeContributionDescription") }}
+        {{ $t("strings.fullNodeContributionDescription") }}
         <span
           style="cursor: pointer; text-decoration: underline;"
           @click="oxenWebsite"
-          >Oxen {{ $t("strings.website") }}.</span
+          >Antd {{ $t("strings.website") }}.</span
         >
       </p>
       <OxenField
-        :label="$t('fieldLabels.serviceNodeKey')"
-        :error="$v.service_node.key.$error"
+        :label="$t('fieldLabels.fullNodeKey')"
+        :error="$v.full_node.key.$error"
       >
         <q-input
-          v-model.trim="service_node.key"
+          v-model.trim="full_node.key"
           :dark="theme == 'dark'"
           :placeholder="$t('placeholders.hexCharacters', { count: 64 })"
           borderless
           dense
-          @blur="$v.service_node.key.$touch"
+          @blur="$v.full_node.key.$touch"
         />
       </OxenField>
       <OxenField
         :label="$t('fieldLabels.amount')"
         class="q-mt-md"
-        :error="$v.service_node.amount.$error"
+        :error="$v.full_node.amount.$error"
       >
         <q-input
-          v-model.trim="service_node.amount"
+          v-model.trim="full_node.amount"
           :dark="theme == 'dark'"
           type="number"
           min="0"
@@ -36,21 +36,21 @@
           placeholder="0"
           borderless
           dense
-          @blur="$v.service_node.amount.$touch"
+          @blur="$v.full_node.amount.$touch"
         />
         <q-btn
           color="primary"
           :text-color="theme == 'dark' ? 'white' : 'dark'"
           :label="$t('buttons.min')"
           :disable="!areButtonsEnabled()"
-          @click="service_node.amount = minStake(service_node.key)"
+          @click="full_node.amount = minStake(full_node.key)"
         />
         <q-btn
           color="primary"
           :text-color="theme == 'dark' ? 'white' : 'dark'"
           :label="$t('buttons.max')"
           :disable="!areButtonsEnabled()"
-          @click="service_node.amount = maxStake(service_node.key)"
+          @click="full_node.amount = maxStake(full_node.key)"
         />
       </OxenField>
       <div class="submit-button">
@@ -68,8 +68,8 @@
         />
       </div>
     </div>
-    <ServiceNodeContribute
-      :awaiting-service-nodes="awaiting_service_nodes"
+    <FullNodeContribute
+      :awaiting-full-nodes="awaiting_full_nodes"
       class="contribute"
       @contribute="fillStakingFields"
     />
@@ -94,27 +94,27 @@
 const objectAssignDeep = require("object-assign-deep");
 import { mapState } from "vuex";
 import { required, decimal } from "vuelidate/lib/validators";
-import { service_node_key, greater_than_zero } from "src/validators/common";
+import { full_node_key, greater_than_zero } from "src/validators/common";
 import OxenField from "components/oxen_field";
 import WalletPassword from "src/mixins/wallet_password";
 import ConfirmDialogMixin from "src/mixins/confirm_dialog_mixin";
-import ServiceNodeContribute from "./service_node_contribute";
-import ServiceNodeMixin from "src/mixins/service_node_mixin";
+import FullNodeContribute from "./full_node_contribute";
+import FullNodeMixin from "src/mixins/full_node_mixin";
 import ConfirmTransactionDialog from "components/confirm_tx_dialog";
 
 const DO_NOTHING = 10;
 
 export default {
-  name: "ServiceNodeStaking",
+  name: "FullNodeStaking",
   components: {
     OxenField,
-    ServiceNodeContribute,
+    FullNodeContribute,
     ConfirmTransactionDialog
   },
-  mixins: [WalletPassword, ConfirmDialogMixin, ServiceNodeMixin],
+  mixins: [WalletPassword, ConfirmDialogMixin, FullNodeMixin],
   data() {
     return {
-      service_node: {
+      full_node: {
         key: "",
         amount: 0,
         // the min and max are for that particular SN,
@@ -134,7 +134,7 @@ export default {
     theme: state => state.gateway.app.config.appearance.theme,
     unlocked_balance: state => state.gateway.wallet.info.unlocked_balance,
     info: state => state.gateway.wallet.info,
-    stake_status: state => state.gateway.service_node_status.stake,
+    stake_status: state => state.gateway.full_node_status.stake,
     sweep_all_status: state => state.gateway.sweep_all_status,
     award_address: state => state.gateway.wallet.info.address,
     confirmSweepAll: state => state.gateway.sweep_all_status.code === 1,
@@ -149,8 +149,8 @@ export default {
       const prefix = (wallet && wallet.address && wallet.address[0]) || "L";
       return `${prefix}..`;
     },
-    awaiting_service_nodes(state) {
-      const nodes = state.gateway.daemon.service_nodes.nodes;
+    awaiting_full_nodes(state) {
+      const nodes = state.gateway.daemon.full_nodes.nodes;
       const getOurContribution = node =>
         node.contributors.find(
           c => c.address === this.award_address && c.amount > 0
@@ -201,8 +201,8 @@ export default {
     }
   }),
   validations: {
-    service_node: {
-      key: { required, service_node_key },
+    full_node: {
+      key: { required, full_node_key },
       amount: {
         required,
         decimal,
@@ -223,7 +223,7 @@ export default {
               message
             });
             this.$v.$reset();
-            this.service_node = {
+            this.full_node = {
               key: "",
               amount: 0
             };
@@ -285,14 +285,14 @@ export default {
   },
   methods: {
     oxenWebsite() {
-      const url = "https://oxen.io/";
+      const url = "https://antdaza.site/";
       this.$gateway.send("core", "open_url", {
         url
       });
     },
     fillStakingFields(key, minContribution) {
-      this.service_node.key = key;
-      this.service_node.amount = minContribution;
+      this.full_node.key = key;
+      this.full_node.amount = minContribution;
     },
     minStake() {
       const node = this.getNodeWithPubKey();
@@ -307,15 +307,15 @@ export default {
       return (operatorPortion / 18446744073709551612) * 100;
     },
     getNodeWithPubKey() {
-      const key = this.service_node.key;
-      const nodeOfKey = this.awaiting_service_nodes.find(
-        n => n.service_node_pubkey === key
+      const key = this.full_node.key;
+      const nodeOfKey = this.awaiting_full_nodes.find(
+        n => n.full_node_pubkey === key
       );
       if (!nodeOfKey) {
         this.$q.notify({
           type: "negative",
           timeout: 1000,
-          message: this.$t("notification.errors.invalidServiceNodeKey")
+          message: this.$t("notification.errors.invalidFullNodeKey")
         });
         return;
       } else {
@@ -372,10 +372,10 @@ export default {
       this.confirmFields = this.buildDialogFields(txData);
     },
     areButtonsEnabled() {
-      // if we can find the service node key in the list of service nodes
-      const key = this.service_node.key;
-      return !!this.awaiting_service_nodes.find(
-        n => n.service_node_pubkey === key
+      // if we can find the full node key in the list of full nodes
+      const key = this.full_node.key;
+      return !!this.awaiting_full_nodes.find(
+        n => n.full_node_pubkey === key
       );
     },
     async sweepAll() {
@@ -413,39 +413,39 @@ export default {
         .onCancel(() => {});
     },
     async stake() {
-      this.$v.service_node.$touch();
+      this.$v.full_node.$touch();
 
-      if (this.$v.service_node.key.$error) {
+      if (this.$v.full_node.key.$error) {
         this.$q.notify({
           type: "negative",
           timeout: 1000,
-          message: this.$t("notification.errors.invalidServiceNodeKey")
+          message: this.$t("notification.errors.invalidFullNodeKey")
         });
         return;
       }
 
-      if (this.service_node.amount < 0) {
+      if (this.full_node.amount < 0) {
         this.$q.notify({
           type: "negative",
           timeout: 1000,
           message: this.$t("notification.errors.negativeAmount")
         });
         return;
-      } else if (this.service_node.amount == 0) {
+      } else if (this.full_node.amount == 0) {
         this.$q.notify({
           type: "negative",
           timeout: 1000,
           message: this.$t("notification.errors.zeroAmount")
         });
         return;
-      } else if (this.service_node.amount > this.unlocked_balance / 1e9) {
+      } else if (this.full_node.amount > this.unlocked_balance / 1e9) {
         this.$q.notify({
           type: "negative",
           timeout: 1000,
           message: this.$t("notification.errors.notEnoughBalance")
         });
         return;
-      } else if (this.$v.service_node.amount.$error) {
+      } else if (this.$v.full_node.amount.$error) {
         this.$q.notify({
           type: "negative",
           timeout: 1000,
@@ -474,12 +474,12 @@ export default {
               sending: true
             }
           });
-          const service_node = objectAssignDeep.noMutate(this.service_node, {
+          const full_node = objectAssignDeep.noMutate(this.full_node, {
             password,
             destination: this.award_address
           });
 
-          this.$gateway.send("wallet", "stake", service_node);
+          this.$gateway.send("wallet", "stake", full_node);
         })
         .onDismiss(() => {})
         .onCancel(() => {});
@@ -489,7 +489,7 @@ export default {
 </script>
 
 <style lang="scss">
-.service-node-staking {
+.full-node-staking {
   .submit-button {
     .q-btn:not(:first-child) {
       margin-left: 8px;
@@ -500,7 +500,7 @@ export default {
   margin-top: 16px;
   padding-left: 8px;
 }
-.service-node-stake-tab {
+.full-node-stake-tab {
   margin-top: 4px;
   user-select: none;
   .header {

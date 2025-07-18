@@ -1,16 +1,16 @@
 <template>
-  <div class="service-node-registration">
+  <div class="full-node-registration">
     <div class="q-pa-md">
       <i18n
-        path="strings.serviceNodeRegistrationDescription"
+        path="strings.fullNodeRegistrationDescription"
         tag="div"
         class="tab-desc q-mb-lg"
       >
-        <b place="registerCommand">register_service_node</b>
+        <b place="registerCommand">register_full_node</b>
         <b place="prepareCommand">prepare_registration</b>
       </i18n>
       <OxenField
-        :label="$t('fieldLabels.serviceNodeCommand')"
+        :label="$t('fieldLabels.fullNodeCommand')"
         :error="$v.registration_string.$error"
         :disabled="registration_status.sending"
       >
@@ -18,7 +18,7 @@
           v-model.trim="registration_string"
           type="textarea"
           class="full-width text-area-oxen"
-          placeholder="register_service_node ..."
+          placeholder="register_full_node ..."
           :disabled="registration_status.sending"
           borderless
           dense
@@ -29,7 +29,7 @@
       <q-btn
         class="register-button"
         color="primary"
-        :label="$t('buttons.registerServiceNode')"
+        :label="$t('buttons.registerFullNode')"
         :disabled="registration_status.sending"
         @click="register()"
       />
@@ -48,7 +48,7 @@ import OxenField from "components/oxen_field";
 import WalletPassword from "src/mixins/wallet_password";
 
 export default {
-  name: "ServiceNodeRegistration",
+  name: "FullNodeRegistration",
   components: {
     OxenField
   },
@@ -60,7 +60,7 @@ export default {
   },
   computed: mapState({
     theme: state => state.gateway.app.config.appearance.theme,
-    registration_status: state => state.gateway.service_node_status.registration
+    registration_status: state => state.gateway.full_node_status.registration
   }),
   validations: {
     registration_string: { required }
@@ -100,16 +100,16 @@ export default {
         this.$q.notify({
           type: "negative",
           timeout: 1000,
-          message: this.$t("notification.errors.invalidServiceNodeCommand")
+          message: this.$t("notification.errors.invalidFullNodeCommand")
         });
         return;
       }
 
       let passwordDialog = await this.showPasswordConfirmation({
-        title: this.$t("dialog.registerServiceNode.title"),
-        noPasswordMessage: this.$t("dialog.registerServiceNode.message"),
+        title: this.$t("dialog.registerFullNode.title"),
+        noPasswordMessage: this.$t("dialog.registerFullNode.message"),
         ok: {
-          label: this.$t("dialog.registerServiceNode.ok"),
+          label: this.$t("dialog.registerFullNode.ok"),
           color: "primary"
         },
         dark: this.theme == "dark",
@@ -126,7 +126,7 @@ export default {
               sending: true
             }
           });
-          this.$gateway.send("wallet", "register_service_node", {
+          this.$gateway.send("wallet", "register_full_node", {
             password,
             string: this.registration_string.trim()
           });

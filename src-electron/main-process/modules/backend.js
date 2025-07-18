@@ -37,20 +37,20 @@ export class Backend {
     let configDir;
     let legacyLokiConfigDir;
     if (os.platform() === "win32") {
-      configDir = "C:\\ProgramData\\oxen";
+      configDir = "C:\\ProgramData\\antd";
       legacyLokiConfigDir = "C:\\ProgramData\\loki\\";
-      this.wallet_dir = `${os.homedir()}\\Documents\\Oxen`;
+      this.wallet_dir = `${os.homedir()}\\Documents\\Antd`;
     } else {
-      configDir = path.join(os.homedir(), ".oxen");
+      configDir = path.join(os.homedir(), ".antd");
       legacyLokiConfigDir = path.join(os.homedir(), ".loki/");
-      this.wallet_dir = path.join(os.homedir(), "Oxen");
+      this.wallet_dir = path.join(os.homedir(), "Antd");
     }
 
     // if the user has used loki before, just keep the same stuff
     if (fs.existsSync(legacyLokiConfigDir)) {
       this.config_dir = legacyLokiConfigDir;
     } else {
-      // create the new, Oxen location
+      // create the new, Antd location
       this.config_dir = configDir;
       if (!fs.existsSync(configDir)) {
         fs.mkdirpSync(configDir);
@@ -122,20 +122,20 @@ export class Backend {
 
     this.remotes = [
       {
-        host: "public-na.optf.ngo",
-        port: "22023"
+        host: "node1.antdaza.site",
+        port: "14041"
       },
       {
-        host: "explorer.oxen.aussie-pools.com",
-        port: "18081"
+        host: "node2.antdaza.site",
+        port: "14041"
       },
       {
-        host: "public-eu.optf.ngo",
-        port: "22023"
+        host: "node3.antdaza.site",
+        port: "14041"
       },
       {
-        host: "oxen-rpc.caliban.org",
-        port: "22023"
+        host: "node4.antdaza.site",
+        port: "14041"
       }
     ];
 
@@ -287,15 +287,15 @@ export class Backend {
         let path = null;
         if (params.type === "tx") {
           path = "tx";
-        } else if (params.type === "service_node") {
+        } else if (params.type === "full_node") {
           path = "sn";
         }
 
         if (path) {
           const baseUrl =
             net_type === "testnet"
-              ? "https://testnet.oxen.observer"
-              : "https://oxen.observer";
+              ? "https://testnet.antdaza.site"
+              : "https://explorer.antdaza.site";
           const url = `${baseUrl}/${path}/`;
           require("electron").shell.openExternal(url + params.id);
         }
@@ -348,7 +348,7 @@ export class Backend {
   async checkVersion() {
     try {
       const { data } = await axios.get(
-        "https://api.github.com/repos/loki-project/loki-electron-gui-wallet/releases/latest"
+        "https://api.github.com/repos/antdaza/antd-electron-gui-wallet/releases/latest"
       );
       // remove the 'v' from front of the version
       const latestVersion = data.tag_name.substring(1);

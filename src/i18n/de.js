@@ -23,7 +23,7 @@ export default {
     next: "WEITER",
     openWallet: "WALLET ÖFFNEN",
     receive: "EMPFANGEN",
-    registerServiceNode: "SERVICE NODE REGISTRIEREN",
+    registerFullNode: "FULL NODE REGISTRIEREN",
     rescan: "ERNEUT SCANNEN",
     restoreWallet: "WALLET WIEDERHERSTELLEN",
     save: "SPEICHERN",
@@ -32,7 +32,7 @@ export default {
     selectWalletFile: "WALLET DATEU AUSWÄHLEN",
     send: "SENDEN",
     sendCoins: "COINS SENDEN",
-    serviceNode: "SERVICE NODE",
+    fullNode: "FULL NODE",
     settings: "EINSTELLUNGEN",
     showQRCode: "QR CODE ANZEIGEN",
     showTxDetails: "TX DETAILS ANZEIGEN",
@@ -97,9 +97,9 @@ export default {
       title: "Passwort",
       message: "Wallet Passwort eingeben um fortzufahren"
     },
-    registerServiceNode: {
-      title: "Service Node registrieren",
-      message: "Möchtest du einen Service Node registrieren?",
+    registerFullNode: {
+      title: "Full Node registrieren",
+      message: "Möchtest du einen Full Node registrieren?",
       ok: "REGISTRIEREN "
     },
     rescan: {
@@ -155,14 +155,14 @@ export default {
       title: "Unlock bestätigen",
       ok: "UNLOCK"
     },
-    unlockServiceNode: {
-      title: "Unlock Service Node",
+    unlockFullNode: {
+      title: "Unlock Full Node",
       confirmTitle: "Unlock bestätigen",
-      message: "Möchtest du den Service Node „unlocken“?",
+      message: "Möchtest du den Full Node „unlocken“?",
       ok: "UNLOCK"
     },
-    unlockServiceNodeWarning: {
-      title: "Unlock service node warning",
+    unlockFullNodeWarning: {
+      title: "Unlock full node warning",
       message:
         "Unlocking a partial stake in a node will also unstake for any other participants, if staking in a shared node its best to let the operator and other participants know you are unstaking.",
       ok: "CONTINUE"
@@ -206,8 +206,8 @@ export default {
     restoreFromBlockHeight: "WIEDERHERSTELLUNG VON BLOCKHÖHE",
     restoreFromDate: "WIEDERHERSTELLUNG VON DATUM",
     seedLanguage: "SEED SPRACHE",
-    serviceNodeCommand: "SERVICE NODE COMMAND",
-    serviceNodeKey: "SERVICE NODE KEY",
+    fullNodeCommand: "FULL NODE COMMAND",
+    fullNodeKey: "FULL NODE KEY",
     signature: "SIGNATURE",
     transactionId: "TRANSACTION ID",
     walletFile: "WALLET FILE",
@@ -238,12 +238,12 @@ export default {
     copyQR: "QR Code kopieren",
     copySeedWords: "Seed Wörter kopieren",
     copySpendKey: "Spend Key kopieren",
-    copyServiceNodeKey: "Copy service node key",
+    copyFullNodeKey: "Copy full node key",
     copyTransactionId: "Transaktions ID kopieren",
     copyViewKey: "View Key kopieren",
     createNewWallet: "Neue Wallet erstellen",
     deleteWallet: "Wallet löschen",
-    exit: "Oxen GUI Wallet schliessen",
+    exit: "Antd GUI Wallet schliessen",
     importOldGUIWallet: "Wallets von alter GUI importieren",
     manageKeyImages: "Key Images verwalten",
     openWallet: "Wallet öffnen",
@@ -271,7 +271,7 @@ export default {
       },
       passwordUpdated: "Passwort aktualisiert",
       qrCopied: "QR Code in die Zwischenablage kopiert",
-      registerServiceNodeSuccess: "Service Node erfolgreich registriert ",
+      registerFullNodeSuccess: "Full Node erfolgreich registriert ",
       sendSuccess: "Transaktion erfolgreich gesendet",
       signatureCopied: "Signature copied to clipboard",
       stakeSuccess: "Staking erfolgreich",
@@ -291,7 +291,7 @@ export default {
       enterTransactionProof: "Enter transaction proof",
       enterWalletName: "Wallet Namen eingeben",
       errorSavingItem: "Fehler beim Speichern {item}",
-      failedServiceNodeUnlock: "Fehler beim Service Node unlock",
+      failedFullNodeUnlock: "Fehler beim Full Node unlock",
       failedToSetLanguage: "Fehler bei der Auswahl der Sprache: {lang}",
       failedWalletImport: "Fehler beim Importieren der Wallet",
       failedWalletOpen:
@@ -307,9 +307,9 @@ export default {
       invalidRestoreDate: "Ungültiges Wiederherstellungsdatum",
       invalidRestoreHeight: "Ungültige Wiederherstellungshöhe",
       invalidSeedLength: "Ungültige Seed Wortlänge",
-      invalidServiceNodeCommand:
-        "Bitte füge den Service Node Registrierungsbefehl ein",
-      invalidServiceNodeKey: "Service Node Key nicht gültig",
+      invalidFullNodeCommand:
+        "Bitte füge den Full Node Registrierungsbefehl ein",
+      invalidFullNodeKey: "Full Node Key nicht gültig",
       invalidWalletPath: "Ungültiger Wallet Pfad",
       keyImages: {
         exporting: "Fehler beim Export der Key images",
@@ -332,7 +332,7 @@ export default {
       noKeyImageExport: "Keine Key Images zum Exportieren gefunden",
       usingLocalNode:
         "Zugang zur Remote Node nicht möglich, wechsle zur lokalen Node",
-      usingRemoteNode: "loxend nicht gefunden, benutze eine Remote Node"
+      usingRemoteNode: "lantdd nicht gefunden, benutze eine Remote Node"
     }
   },
   placeholders: {
@@ -436,8 +436,8 @@ export default {
     saveToAddressBook: "In Adressbuch speichern",
     seedWords: "Seed Wörter",
     selectLanguage: "Sprache auswählen",
-    serviceNodeRegistrationDescription:
-      "Hier den {registerComand} Befehl, der mit Hilfe des Daemons durch das Kommando {prepareCommand} erzeugt wurde, eingeben, um eine Service Node zu aktivieren",
+    fullNodeRegistrationDescription:
+      "Hier den {registerComand} Befehl, der mit Hilfe des Daemons durch das Kommando {prepareCommand} erzeugt wurde, eingeben, um eine Full Node zu aktivieren",
     spendKey: "Spend key",
     startingDaemon: "Daemon wird gestartet",
     startingWallet: "Wallet wird gestartet",
@@ -462,7 +462,7 @@ export default {
         pendingIncoming: "Ausstehend eingehend",
         pendingOutgoing: "Ausstehend ausgehend",
         miner: "Miner",
-        serviceNode: "Service Node",
+        fullNode: "Full Node",
         governance: "Governance",
         stake: "Stake",
         failed: "Fehlgeschlagen"
@@ -487,7 +487,7 @@ export default {
     currentlyStakedNodes: "Currently staked nodes",
     privateKeys: "Private Keys",
     rescanWallet: "Wallet erneut scannen",
-    serviceNode: {
+    fullNode: {
       registration: "REGISTRIERUNG",
       staking: "STAKING"
     },
