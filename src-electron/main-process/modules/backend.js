@@ -38,11 +38,11 @@ export class Backend {
     let legacyLokiConfigDir;
     if (os.platform() === "win32") {
       configDir = "C:\\ProgramData\\antd";
-      legacyLokiConfigDir = "C:\\ProgramData\\loki\\";
+      legacyLokiConfigDir = "C:\\ProgramData\\antdd\\";
       this.wallet_dir = `${os.homedir()}\\Documents\\Antd`;
     } else {
       configDir = path.join(os.homedir(), ".antd");
-      legacyLokiConfigDir = path.join(os.homedir(), ".loki/");
+      legacyLokiConfigDir = path.join(os.homedir(), ".antdd/");
       this.wallet_dir = path.join(os.homedir(), "Antd");
     }
 
@@ -66,9 +66,9 @@ export class Backend {
     const daemon = {
       type: "remote",
       p2p_bind_ip: "0.0.0.0",
-      p2p_bind_port: 22022,
+      p2p_bind_port: 14040,
       rpc_bind_ip: "127.0.0.1",
-      rpc_bind_port: 22023,
+      rpc_bind_port: 14041,
       zmq_rpc_bind_ip: "127.0.0.1",
       out_peers: -1,
       in_peers: -1,
@@ -80,8 +80,8 @@ export class Backend {
     const daemons = {
       mainnet: {
         ...daemon,
-        remote_host: "imaginary.stream",
-        remote_port: 22023
+        remote_host: "node.antdaza.site",
+        remote_port: 14041
       },
       stagenet: {
         ...daemon,
