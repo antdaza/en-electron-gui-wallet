@@ -233,7 +233,7 @@ export default {
     onsType: "ONS RECORD TYPE",
     localDaemonIP: "LOCAL DAEMON IP",
     localDaemonPort: "LOCAL DAEMON PORT",
-    lokinetFullAddress: "LOKINET FULL ADDRESS",
+    lokinetFullAddress: "ANTDNET FULL ADDRESS",
     maxIncomingPeers: "MAX INCOMING PEERS",
     maxOutgoingPeers: "MAX OUTGOING PEERS",
     message: "MESSAGE",
@@ -287,8 +287,8 @@ export default {
     changePassword: "Change Password",
     copyAddress: "Copy address",
     copyBackupOwner: "Copy backup owner",
-    copyLokinetAddress: "Copy lokinet address",
-    copyLokinetName: "Copy lokinet name",
+    copyLokinetAddress: "Copy Antdnet address",
+    copyLokinetName: "Copy Antdnet name",
     copyName: "Copy name",
     copyOwner: "Copy owner",
     copyQR: "Copy QR code",
@@ -331,8 +331,8 @@ export default {
         imported: "Key images imported"
       },
       onsRecordUpdated: "ONS Record was successfully updated",
-      lokinetAddressCopied: "Full lokinet address copied",
-      lokinetNameCopied: "Lokinet name copied",
+      lokinetAddressCopied: "Full Antdnet address copied",
+      lokinetNameCopied: "Antdnet name copied",
       passwordUpdated: "Password updated",
       namePurchased: "Name successfully purchased",
       nameRenewed: "Name successfully renewed",
@@ -430,7 +430,7 @@ export default {
     onsBackupOwner: "The wallet address of the backup owner",
     onsDecryptName: "A ONS name that belongs to you",
     lokinetFullAddress:
-      "Full lokinet address to map ONS name to (without .loki)",
+      "Full Antdnet address to map ONS name to (without .loki)",
     mnemonicSeed: "25 (or 24) word mnemonic seed",
     pasteTransactionId: "Paste transaction ID",
     pasteTransactionProof: "Paste transaction proof",
@@ -508,8 +508,8 @@ export default {
     ons: {
       sessionID: "Session ID",
       wallet: "Wallet Address",
-      lokinetName1Year: "Lokinet Name 1 year",
-      lokinetNameXYears: "Lokinet Name {years} years",
+      lokinetName1Year: "Antdnet Name 1 year",
+      lokinetNameXYears: "Antdnet Name {years} years",
       prices: "ONS Prices:"
     },
     onsPurchaseDescription:
@@ -521,7 +521,7 @@ export default {
     loadingSettings: "Loading settings",
     oxenBalance: "Balance",
     lokinetNameDescription:
-      "Purchase or update a name on Lokinet. If you purchase a name it may take a minute or two for it to show up in the list. To learn more about lokinet visit: ",
+      "Purchase or update a name on Antdnet. If you purchase a name it may take a minute or two for it to show up in the list. To learn more about Antdnet visit: ",
     oxenAccumulatedRewards: "Accumulated rewards",
     oxenUnlockedBalance: "Unlocked balance",
     oxenUnlockedShort: "Unlocked",
@@ -636,7 +636,7 @@ export default {
     currentlyStakedNodes: "Currently staked nodes",
     onsRecordDetails: "ONS record details",
     onsSessionRecords: "Session records",
-    onsLokinetRecords: "Lokinet records",
+    onsLokinetRecords: "Antdnet records",
     onsWalletRecords: "Wallet records",
     privateKeys: "Private keys",
     rescanWallet: "Rescan wallet",

@@ -1,32 +1,27 @@
-# Oxen Electron GUI Wallet
+# AntD Electron GUI Wallet
 
 ### Introduction
 
-Oxen (formerly Loki) is a private cryptocurrency based on Monero. Oxen aims to provide a private data transmission layer using a second layer of Full Nodes.
-More information on the project can be found on the [website](https://oxen.io) and in the [whitepaper](https://loki.network/whitepaper). Oxen is an open source project, and we encourage contributions from anyone with something to offer.
+ANTD stands for Anonymous Network Transaction Data, and true to its name, it gives users not only anonymous financial freedom, but also a decentralized communication layer encrypted, immutable, and censorship resistant.
 
-![Oxen wallet image](./src-electron/icons/mrcuug.PNG)
+While Monero excels in anonymous transactions, ANTD takes the next step: letting users publish messages and short-form articles directly into the blockchain, with full privacy and optionally rewarded publishing.
 
-### About this project
-
-This is the new Electron GUI for Oxen. It is open source and completely free to use without restrictions, anyone may create an alternative implementation of the Oxen Electron GUI that uses the protocol and network in a compatible manner.
-
-Please submit any changes as pull requests to the development branch, all changes are assessed in the development branch before being merged to master, release tags are considered stable builds for the GUI.
+![AntD wallet image](./src-electron/icons/mrcuug.PNG)
 
 #### Pre-requisites
 
-- Download latest [oxend](https://github.com/oxen-io/oxen-core/releases/latest)
-- Extract the oxend binaries to a folder
+- Download latest [antdd](https://github.com/antdaza/antd/releases/latest)
+- Extract the antdd binaries to a folder
 
 #### Commands
 
 ```
 nvm use 14.11.0
 npm install -g @quasar/cli
-git clone https://github.com/oxen-io/oxen-electron-gui-wallet
-cd oxen-electron-gui-wallet
-cp path_to_oxend_binaries/oxend bin/
-cp path_to_oxend_binaries/oxen-wallet-rpc bin/
+git clone https://github.com/antdaza/en-antd-electron-gui-wallet
+cd en-antd-electron-gui-wallet
+cp path_to_antdd_binaries/antdd bin/
+cp path_to_antdd_binaries/antdd-wallet-rpc bin/
 npm install
 ```
 
